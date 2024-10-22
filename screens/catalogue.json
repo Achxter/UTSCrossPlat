@@ -1,0 +1,68 @@
+{
+  "catalogue": {
+    "pulsa": {
+      "amounts": [
+        {
+          "amount": 10000,
+          "chargedAmount": 11000
+        },
+        {
+          "amount": 25000,
+          "chargedAmount": 26000
+        },
+        {
+          "amount": 50000,
+          "chargedAmount": 51000
+        },
+        {
+          "amount": 100000,
+          "chargedAmount": 101000
+        }
+      ]
+    },
+    "token": {
+      "amounts": [
+        {
+          "amount": 20000,
+          "chargedAmount": 21000
+        },
+        {
+          "amount": 50000,
+          "chargedAmount": 51000
+        },
+        {
+          "amount": 100000,
+          "chargedAmount": 101000
+        },
+        {
+          "amount": 200000,
+          "chargedAmount": 201000
+        }
+      ]
+    },
+    "bpjs": {
+      "amounts": [
+        {
+          "bulan": 1,
+          "amount": 50000,
+          "chargedAmount": 51000
+        },
+        {
+          "bulan": 2,
+          "amount": 100000,
+          "chargedAmount": 101000
+        },
+        {
+          "bulan": 3,
+          "amount": 150000,
+          "chargedAmount": 151000
+        },
+        {
+          "bulan": 4,
+          "amount": 200000,
+          "chargedAmount": 201000
+        }
+      ]
+    }
+  }
+}

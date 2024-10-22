@@ -33,19 +33,19 @@ function Homepage({ navigation }) {
         )}
       />
       <View style={{ marginBottom: 160, gap: 16 }}>
-        <Card onPress={() => navigation.navigate('Catalogue')}>
+        <Card onPress={() => navigation.navigate('Catalogue', { category: 'pulsa' })}>
           <Card.Title
-            title="Pulsa / Data"
+            title="Pulsa"
             left={(props) => <Icon {...props} source={require('../assets/pulsa.png')} />}
           />
         </Card>
-        <Card onPress={() => navigation.navigate('Catalogue')}>
+        <Card onPress={() => navigation.navigate('Catalogue', { category: 'token' })}>
           <Card.Title
             title="Token Listrik"
             left={(props) => <Icon {...props} source={require('../assets/token.png')} />}
           />
         </Card>
-        <Card onPress={() => navigation.navigate('Catalogue')}>
+        <Card onPress={() => navigation.navigate('Catalogue', { category: 'bpjs' })}>
           <Card.Title
             title="BPJS"
             left={(props) => <Icon {...props} source={require('../assets/bpjs.png')} />}
