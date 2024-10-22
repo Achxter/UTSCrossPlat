@@ -9,7 +9,7 @@ const carouselData = [
   { id: 3, title: 'Promo 3', image: require('../assets/carousel3.webp') }, // Corrected file extension
 ];
 
-function Homepage() {
+function Homepage({ navigation }) {
   const { width } = Dimensions.get('window');
   return (
     <View style={{ height: '100%', paddingHorizontal: 16, backgroundColor: '#FFFFFF', justifyContent: 'center' }}>
@@ -33,26 +33,26 @@ function Homepage() {
         )}
       />
       <View style={{ marginBottom: 160, gap: 16 }}>
-        <Card>
+        <Card onPress={() => navigation.navigate('Catalogue')}>
           <Card.Title
             title="Pulsa / Data"
             left={(props) => <Icon {...props} source={require('../assets/pulsa.png')} />}
           />
         </Card>
-        <Card>
+        <Card onPress={() => navigation.navigate('Catalogue')}>
           <Card.Title
             title="Token Listrik"
             left={(props) => <Icon {...props} source={require('../assets/token.png')} />}
           />
         </Card>
-        <Card>
+        <Card onPress={() => navigation.navigate('Catalogue')}>
           <Card.Title
             title="BPJS"
             left={(props) => <Icon {...props} source={require('../assets/bpjs.png')} />}
           />
         </Card>
       </View>
-    </View>
+    </View >
   )
 }
 

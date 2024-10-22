@@ -19,7 +19,7 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <PaperProvider>
-          <Tab.Navigator initialRouteName='History' screenOptions={{ tabBarStyle: { height: 55 }, headerStyle: { shadowColor: '#000000', shadowRadius: 5 } }}>
+          <Tab.Navigator screenOptions={{ tabBarStyle: { height: 55 }, headerStyle: { shadowColor: '#000000', shadowRadius: 5 } }}>
             <Tab.Screen name="Home" component={HomeStack} options={{
               headerShown: false,
               tabBarIcon: ({ color }) => (
