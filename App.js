@@ -19,21 +19,21 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <PaperProvider>
-          <Tab.Navigator screenOptions={{tabBarStyle: {height: 55}}}>
+          <Tab.Navigator initialRouteName='History' screenOptions={{ tabBarStyle: { height: 55 }, headerStyle: { shadowColor: '#000000', shadowRadius: 5 } }}>
             <Tab.Screen name="Home" component={HomeStack} options={{
               headerShown: false,
               tabBarIcon: ({ color }) => (
                 <Icon source="home" color={color} size={35} />
               ),
             }} />
-            <Tab.Screen name="Transaksi" component={HistoryStack} options={{
+            <Tab.Screen name="History" component={HistoryStack} options={{
               headerShown: false,
               tabBarIcon: ({ color }) => (
                 <Icon source="history" color={color} size={35} />
               ),
             }} />
             <Tab.Screen name="Profile" component={Profile} options={{
-              headerShown: false,
+              headerTitleAlign: 'center',
               tabBarIcon: ({ color }) => (
                 <Icon source="account" color={color} size={35} />
               ),

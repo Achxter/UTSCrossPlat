@@ -11,15 +11,15 @@ import { View } from 'react-native';
 const Stack = createStackNavigator();
 
 const HomeStack = () => (
-  <Stack.Navigator screenOptions={{ animationTypeForReplace: 'push' }}>
+  <Stack.Navigator screenOptions={{ animationTypeForReplace: 'push', headerStyle: { shadowColor: '#000000', shadowRadius: 5 } }}>
     <Stack.Screen name="Homepage" options={{
       headerTitle: () => {
         return (
-          <View style={{flexDirection: 'row', alignItems: 'center', gap: 8}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
             <Icon
               source={require('./assets/icon.png')}
               size={50} />
-            <Text style={{fontSize: 20}}>All-U-Need</Text>
+            <Text style={{ fontSize: 20 }}>All-U-Need</Text>
           </View>
         )
       },
