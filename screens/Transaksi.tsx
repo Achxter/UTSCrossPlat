@@ -1,9 +1,22 @@
+import { useFocusEffect } from '@react-navigation/native';
 import React from 'react'
-import { ScrollView, Text, Touchable, TouchableOpacity, View } from 'react-native'
+import { BackHandler, ScrollView, Text, Touchable, TouchableOpacity, View } from 'react-native'
 import { Card } from 'react-native-paper'
 
 function Transaksi({ navigation }) {
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        navigation.navigate('Homepage');
+        return true;
+      };
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [])
+  );
+  
   return (
     <ScrollView style={{ backgroundColor: '#FFFFFF', paddingHorizontal: 24 }}>
       <Card style={{ padding: 16, paddingHorizontal: 24 }} onPress={() => navigation.navigate('DetailTransaksi')}>
