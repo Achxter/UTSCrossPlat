@@ -2,15 +2,17 @@ import React from 'react'
 import { Text, View, Image, Dimensions, StyleSheet, ImageBackground } from 'react-native';
 import { Card, Divider, Icon, IconButton } from 'react-native-paper';
 import Carousel from 'react-native-reanimated-carousel';
+import { useSelector } from 'react-redux'
 
 const carouselData = [
-  { id: 1, title: 'Promo 1', image: require('../assets/carousel1.jpg') },
+  { id: 1, title: 'Promo 1', image: require('../assets/carousel1.png') },
   { id: 2, title: 'Promo 2', image: require('../assets/carousel2.png') },
-  { id: 3, title: 'Promo 3', image: require('../assets/carousel3.webp') }, // Corrected file extension
+  { id: 3, title: 'Promo 3', image: require('../assets/carousel3.png') },
 ];
 
 function Homepage({ navigation }) {
   const { width } = Dimensions.get('window');
+  const saldo = useSelector((state: { saldo: { value: number } }) => state.saldo.value)
   return (
     <View style={{ height: '100%', paddingHorizontal: 16, backgroundColor: '#FFFFFF', justifyContent: 'center' }}>
       <Card style={{ marginTop: 20, overflow: 'hidden' }}>
@@ -22,7 +24,7 @@ function Homepage({ navigation }) {
           <Divider style={{ marginTop: 16 }} />
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 8 }}>
             <Text style={{ fontSize: 18 }}>Saldo</Text>
-            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Rp 100.000</Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{saldo.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</Text>
           </View>
         </ImageBackground>
       </Card>

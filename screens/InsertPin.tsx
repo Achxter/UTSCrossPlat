@@ -1,18 +1,56 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View, Alert, Keyboard } from 'react-native';
-import { Button, Dialog, Portal } from 'react-native-paper';
+import { ActivityIndicator, Button, Dialog, Portal } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { currentStatus } from '../reducers/statusSlice';
+import { addHistory } from '../reducers/historySlice';
+import { pay } from '../reducers/saldoSlice';
+
+interface HistoryItem {
+  transactionID: string;
+  number: string;
+  merchant: string;
+  nominal: number;
+  status: boolean;
+  date: string;
+}
+
+interface RootState {
+  history: HistoryItem[];  // Adjust this to match your actual structure
+}
 
 function InsertPin({ navigation }) {
   const [pin, setPin] = useState('');
   const [attempts, setAttempts] = useState(0);
   const [isError, setIsError] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
-  const birthDatePin = '090204'; // Replace this with your birth date in DDMMYY format
+  const birthDatePin = '090204';
   const inputRef = useRef(null);
   const [visible, setVisible] = React.useState(false);
   const hideDialog = () => setVisible(false);
   const [visibleMax, setVisibleMax] = React.useState(false);
   const hideDialogMax = () => setVisibleMax(false);
+  const [visibleLoading, setVisibleLoading] = useState(false)
+  const showLoading = () => setVisibleLoading(true)
+  const hideLoading = () => setVisibleLoading(false)
+  const dispatch = useDispatch();
+  const history = useSelector((state: RootState) => state.history);
+  const ID = useSelector((state: { ID: { value: string } }) => state.ID.value);
+  const merchant = useSelector((state: { merchant: { value: string } }) => state.merchant.value);
+  const nominal = useSelector((state: { nominal: { value: number } }) => state.nominal.value);
+  const getCurrentDateTime = () => {
+    const now = new Date();
+    const date = now.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    });
+    const time = now.toLocaleTimeString('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+    return `${date}, ${time}`;
+  };
 
   useEffect(() => {
     const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
@@ -29,7 +67,6 @@ function InsertPin({ navigation }) {
     if (value.length <= 6) {
       setPin(value);
 
-      // Validate the PIN once it reaches 6 digits
       if (value.length === 6) {
         if (value === birthDatePin) {
           setIsError(true);
@@ -37,18 +74,39 @@ function InsertPin({ navigation }) {
 
           if (attempts + 1 >= 3) {
             setVisibleMax(true);
+            dispatch(currentStatus(false));
+            dispatch(addHistory({
+              transactionID: 'ID' + String(history.length + 1).padStart(3, '0'),
+              number: ID,
+              merchant: merchant,
+              nominal: nominal,
+              status: false,
+              date: getCurrentDateTime(),
+            }));
             setTimeout(() => {
               hideDialogMax();
               navigation.navigate('Success');
             }, 2000);
-            // Logic for handling a failed transaction can go here
           } else {
             setVisible(true);
           }
         } else {
           setIsError(false);
-          navigation.navigate('Success');
-          // Logic for handling a successful PIN entry can go here
+          showLoading();
+          dispatch(currentStatus(true));
+          dispatch(pay(nominal));
+          dispatch(addHistory({
+            transactionID: 'ID' + String(history.length + 1).padStart(3, '0'),
+            number: ID,
+            merchant: merchant,
+            nominal: nominal,
+            status: true,
+            date: getCurrentDateTime(),
+          }));
+          setTimeout(() => {
+            hideLoading();
+            navigation.navigate('Success');
+          }, 2000);
         }
         setPin('');
       }
@@ -106,6 +164,7 @@ function InsertPin({ navigation }) {
           </Dialog.Actions>
         </Dialog>
       </Portal>
+      <ActivityIndicator animating={visibleLoading} />
     </View>
   );
 }

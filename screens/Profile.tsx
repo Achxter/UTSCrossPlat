@@ -1,6 +1,7 @@
 import React from 'react'
 import { Image, Text, View } from 'react-native'
 import { Card, Divider, Switch } from 'react-native-paper'
+import { useSelector } from 'react-redux';
 
 function Profile() {
   return (

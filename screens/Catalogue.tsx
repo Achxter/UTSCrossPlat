@@ -2,15 +2,19 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { Card, Icon, Searchbar } from 'react-native-paper'
 import catalogueData from './catalogue.json'
+import { useDispatch } from 'react-redux'
+import { currentID } from '../reducers/IDSlice'
+import { currentMerchant } from '../reducers/merchantSlice'
+import { currentNominal } from '../reducers/nominalSlice'
 
 function validatePhoneNumber(phoneNumber) {
   const operators = {
-    Telkomsel: ['0852', '0853', '0811', '0812', '0813', '0821', '0822', '0823', '0851'],
-    Indosat: ['0855', '0856', '0857', '0858', '0814', '0815', '0816'],
-    XL: ['0817', '0818', '0819', '0859', '0877', '0878'],
-    Axis: ['0832', '0833', '0838'],
-    Tri: ['0895', '0896', '0897', '0898', '0899'],
-    Smartfren: ['0881', '0882', '0883', '0884', '0885', '0886', '0887', '0888', '0889'],
+    telkomsel: ['0852', '0853', '0811', '0812', '0813', '0821', '0822', '0823', '0851'],
+    indosat: ['0855', '0856', '0857', '0858', '0814', '0815', '0816'],
+    xl: ['0817', '0818', '0819', '0859', '0877', '0878'],
+    axis: ['0832', '0833', '0838'],
+    tri: ['0895', '0896', '0897', '0898', '0899'],
+    smartfren: ['0881', '0882', '0883', '0884', '0885', '0886', '0887', '0888', '0889'],
   };
 
   if (!phoneNumber.startsWith('08') || phoneNumber.length < 10 || phoneNumber.length > 13) {
@@ -46,6 +50,7 @@ function Catalogue({ route, navigation }) {
   const [alert, setAlert] = React.useState('');
   const { category } = route.params;
   const { pulsa, token, bpjs } = catalogueData.catalogue;
+  const dispatch = useDispatch();
 
   return (
     <View style={{ paddingHorizontal: 16, marginTop: 16 }}>
@@ -75,7 +80,12 @@ function Catalogue({ route, navigation }) {
                 <Card
                   key={item.amount.toString()}
                   style={{ marginVertical: 6, paddingVertical: 20 }}
-                  onPress={() => navigation.navigate('Confirm')}>
+                  onPress={() => {
+                    dispatch(currentID(searchQuery));
+                    dispatch(currentMerchant(validatePhoneNumber(searchQuery)));
+                    dispatch(currentNominal(item.chargedAmount));
+                    navigation.navigate('Confirm');
+                  }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                     <Text style={{ fontSize: 20, color: 'primary' }}>
                       {item.amount.toLocaleString('id-ID')}
@@ -115,7 +125,12 @@ function Catalogue({ route, navigation }) {
                 <Card
                   key={item.amount.toString()}
                   style={{ marginVertical: 6, paddingVertical: 20 }}
-                  onPress={() => navigation.navigate('Confirm')}>
+                  onPress={() => {
+                    dispatch(currentID(searchQuery));
+                    dispatch(currentMerchant('pln'));
+                    dispatch(currentNominal(item.chargedAmount));
+                    navigation.navigate('Confirm');
+                  }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                     <Text style={{ fontSize: 20, color: 'primary' }}>
                       {item.amount.toLocaleString('id-ID')}
@@ -155,7 +170,12 @@ function Catalogue({ route, navigation }) {
                 <Card
                   key={item.amount.toString()}
                   style={{ marginVertical: 6, paddingVertical: 20 }}
-                  onPress={() => navigation.navigate('Confirm')}>
+                  onPress={() => {
+                    dispatch(currentID(searchQuery));
+                    dispatch(currentMerchant('bpjs'));
+                    dispatch(currentNominal(item.chargedAmount));
+                    navigation.navigate('Confirm');
+                  }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                     <Text style={{ fontSize: 20, color: 'primary' }}>
                       {item.bulan} bulan
