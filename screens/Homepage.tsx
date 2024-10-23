@@ -1,6 +1,6 @@
 import React from 'react'
-import { Text, View, Image, Dimensions, StyleSheet } from 'react-native';
-import { Card, Icon, IconButton } from 'react-native-paper';
+import { Text, View, Image, Dimensions, StyleSheet, ImageBackground } from 'react-native';
+import { Card, Divider, Icon, IconButton } from 'react-native-paper';
 import Carousel from 'react-native-reanimated-carousel';
 
 const carouselData = [
@@ -13,26 +13,20 @@ function Homepage({ navigation }) {
   const { width } = Dimensions.get('window');
   return (
     <View style={{ height: '100%', paddingHorizontal: 16, backgroundColor: '#FFFFFF', justifyContent: 'center' }}>
-      <Carousel
-        style={{ marginTop: 20 }}
-        loop
-        width={width - 32}
-        height={width / 2}
-        autoPlay={true}
-        data={carouselData}
-        scrollAnimationDuration={1000}
-        renderItem={({ item }) => (
-          <View key={item.id} style={styles.carouselItem}>
-            <Image
-              source={item.image}
-              style={styles.carouselImage}
-              resizeMode="cover"
-            />
-            <Text style={styles.carouselText}>{item.title}</Text>
+      <Card style={{ marginTop: 20, overflow: 'hidden' }}>
+        <ImageBackground style={{ padding: 16 }} imageStyle={{ opacity: 0.2, left: 80, right: -80, bottom: -300 }} source={require('../assets/logo-umn.png')}>
+          <Text>Welcome,</Text>
+          <Text style={{ fontSize: 24, fontWeight: 'bold', marginTop: 4 }}>
+            Hans Philemon Limanza
+          </Text>
+          <Divider style={{ marginTop: 16 }} />
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 8 }}>
+            <Text style={{ fontSize: 18 }}>Saldo</Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Rp 100.000</Text>
           </View>
-        )}
-      />
-      <View style={{ marginBottom: 160, gap: 16 }}>
+        </ImageBackground>
+      </Card>
+      <View style={{ marginVertical: 36, gap: 16 }}>
         <Card onPress={() => navigation.navigate('Catalogue', { category: 'pulsa' })}>
           <Card.Title
             title="Pulsa"
@@ -52,6 +46,25 @@ function Homepage({ navigation }) {
           />
         </Card>
       </View>
+      <Carousel
+        loop
+        width={width - 32}
+        height={width / 2}
+        autoPlay={true}
+        data={carouselData}
+        scrollAnimationDuration={1000}
+        renderItem={({ item }) => (
+          <View key={item.id} style={styles.carouselItem}>
+            <Image
+              source={item.image}
+              style={styles.carouselImage}
+              resizeMode="cover"
+            />
+            <Text style={styles.carouselText}>{item.title}</Text>
+          </View>
+        )}
+      />
+
     </View >
   )
 }

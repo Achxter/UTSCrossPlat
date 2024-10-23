@@ -11,7 +11,7 @@ import { View } from 'react-native';
 const Stack = createStackNavigator();
 
 const HomeStack = () => (
-  <Stack.Navigator initialRouteName='Success' screenOptions={{ animationTypeForReplace: 'push', headerStyle: { shadowColor: '#000000', shadowRadius: 5 } }}>
+  <Stack.Navigator screenOptions={{ animationTypeForReplace: 'push', headerStyle: { shadowColor: '#000000', shadowRadius: 5 } }}>
     <Stack.Screen name="Homepage" options={{
       headerTitle: () => {
         return (
