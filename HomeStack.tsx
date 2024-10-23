@@ -11,7 +11,7 @@ import { View } from 'react-native';
 const Stack = createStackNavigator();
 
 const HomeStack = () => (
-  <Stack.Navigator screenOptions={{ animationTypeForReplace: 'push', headerStyle: { shadowColor: '#000000', shadowRadius: 5 } }}>
+  <Stack.Navigator initialRouteName='Success' screenOptions={{ animationTypeForReplace: 'push', headerStyle: { shadowColor: '#000000', shadowRadius: 5 } }}>
     <Stack.Screen name="Homepage" options={{
       headerTitle: () => {
         return (
@@ -25,8 +25,10 @@ const HomeStack = () => (
       },
     }} component={Homepage} />
     <Stack.Screen name="Catalogue" component={Catalogue} />
-    <Stack.Screen name="Confirm" component={Confirm} />
-    <Stack.Screen name="InsertPin" component={InsertPin} options={{ headerShown: false }} />
+    <Stack.Screen name="Confirm" component={Confirm} options={{
+      title: 'Konfirmasi Pembayaran',
+    }} />
+    <Stack.Screen name="InsertPin" component={InsertPin} options={{ headerTitle: '' }} />
     <Stack.Screen name="Success" component={Success} options={{ headerShown: false }} />
   </Stack.Navigator>
 );

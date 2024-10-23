@@ -75,7 +75,7 @@ function Catalogue({ route, navigation }) {
                 <Card
                   key={item.amount.toString()}
                   style={{ marginVertical: 6, paddingVertical: 20 }}
-                  onPress={() => navigation.navigate('InsertPin')}>
+                  onPress={() => navigation.navigate('Confirm')}>
                   <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                     <Text style={{ fontSize: 20, color: 'primary' }}>
                       {item.amount.toLocaleString('id-ID')}
@@ -115,7 +115,7 @@ function Catalogue({ route, navigation }) {
                 <Card
                   key={item.amount.toString()}
                   style={{ marginVertical: 6, paddingVertical: 20 }}
-                  onPress={() => navigation.navigate('InsertPin')}>
+                  onPress={() => navigation.navigate('Confirm')}>
                   <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                     <Text style={{ fontSize: 20, color: 'primary' }}>
                       {item.amount.toLocaleString('id-ID')}
@@ -155,7 +155,7 @@ function Catalogue({ route, navigation }) {
                 <Card
                   key={item.amount.toString()}
                   style={{ marginVertical: 6, paddingVertical: 20 }}
-                  onPress={() => navigation.navigate('InsertPin')}>
+                  onPress={() => navigation.navigate('Confirm')}>
                   <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                     <Text style={{ fontSize: 20, color: 'primary' }}>
                       {item.bulan} bulan
