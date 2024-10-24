@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import { Button, Icon } from 'react-native-paper'
+import { Button, Icon, useTheme } from 'react-native-paper'
 import { useFocusEffect } from '@react-navigation/native';
 import { BackHandler } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ function Success({ navigation }) {
   const nominal = useSelector((state: { nominal: { value: number } }) => state.nominal.value);
   const saldo = useSelector((state: { saldo: { value: number } }) => state.saldo.value);
   const status = useSelector((state: { status: { value: boolean } }) => state.status.value);
+  const theme = useTheme();
 
   useFocusEffect(
     React.useCallback(() => {
@@ -40,10 +41,13 @@ function Success({ navigation }) {
         </>
       )}
       <Button
-        style={{ position: 'absolute', bottom: 50, width: '60%' }}
+        style={{ backgroundColor: theme.colors.primary, position: 'absolute', bottom: 50, width: '60%' }}
         mode='contained-tonal'
         onPress={() => navigation.navigate('Homepage')}
-      >Tutup
+      >
+        <Text style={{ color: theme.colors.onPrimary }}>
+          Tutup
+        </Text>
       </Button>
     </View>
   )

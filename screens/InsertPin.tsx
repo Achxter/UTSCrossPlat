@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View, Alert, Keyboard } from 'react-native';
-import { ActivityIndicator, Button, Dialog, Portal } from 'react-native-paper';
+import { ActivityIndicator, Button, Dialog, Portal, useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentStatus } from '../reducers/statusSlice';
 import { addHistory } from '../reducers/historySlice';
@@ -117,17 +117,18 @@ function InsertPin({ navigation }) {
     setIsFocused(true);
     inputRef.current.focus();
   };
+  const theme = useTheme();
 
   return (
     <View style={{ paddingHorizontal: 16 }}>
-      <Text style={{ textAlign: 'center', fontSize: 24, fontWeight: 'bold', marginTop: 50 }}>
+      <Text style={{ color: theme.colors.onBackground, textAlign: 'center', fontSize: 24, fontWeight: 'bold', marginTop: 50 }}>
         Masukkan PIN Anda
       </Text>
       <View style={styles.pinContainer}>
         {Array(6).fill('').map((_, index) => (
-          <View key={index} style={[styles.circle, isError && { borderColor: 'red' }]}>
+          <View key={index} style={[styles.circle, { borderColor: theme.colors.onBackground }, isError && { borderColor: 'red' }]}>
             {pin.length > index && (
-              <View style={[styles.filledCircle, isError && { backgroundColor: 'red' }]} />
+              <View style={[styles.filledCircle, { backgroundColor: theme.colors.onBackground }, isError && { backgroundColor: 'red' }]} />
             )}
           </View>
         ))}
@@ -157,7 +158,7 @@ function InsertPin({ navigation }) {
         <Dialog visible={visible}>
           <Dialog.Title>PIN Salah</Dialog.Title>
           <Dialog.Content>
-            <Text>Kesempatan tersisa: {3 - attempts}</Text>
+            <Text style={{ color: theme.colors.onBackground }}>Kesempatan tersisa: {3 - attempts}</Text>
           </Dialog.Content>
           <Dialog.Actions>
             <Button onPress={() => hideDialog()}>OK</Button>
@@ -181,7 +182,6 @@ const styles = StyleSheet.create({
     height: 20,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#000',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -189,7 +189,6 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: '#000',
   },
   hiddenInput: {
     position: 'absolute',
