@@ -121,11 +121,11 @@ function Catalogue({ route, navigation }) {
           <Text style={{ color: 'red', textAlign: 'center', fontSize: 20 }}>{alert}</Text>
           {searchQuery.length >= 11 && alert === '' && (
             <View>
-              <Text style={{ fontSize: 20, marginVertical: 16, textAlign: 'center' }}>Pilih Nominal Token Listrik</Text>
+              <Text style={{ color: theme.colors.onBackground, fontSize: 20, marginVertical: 16, textAlign: 'center' }}>Pilih Nominal Token Listrik</Text>
               {token.amounts.map((item) => (
                 <Card
                   key={item.amount.toString()}
-                  style={{ marginVertical: 6, paddingVertical: 20 }}
+                  style={{ marginVertical: 6, paddingVertical: 20, backgroundColor: theme.colors.secondaryContainer }}
                   onPress={() => {
                     dispatch(currentID(searchQuery));
                     dispatch(currentMerchant('pln'));
@@ -133,11 +133,11 @@ function Catalogue({ route, navigation }) {
                     navigation.navigate('Confirm');
                   }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-                    <Text style={{ fontSize: 20, color: 'primary' }}>
+                    <Text style={{ fontSize: 20, color: theme.colors.onSecondaryContainer }}>
                       {item.amount.toLocaleString('id-ID')}
                     </Text>
                     <Icon source='arrow-right-circle' size={30} />
-                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: theme.colors.onSecondaryContainer }}>
                       {item.chargedAmount.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
                     </Text>
                   </View>
@@ -166,11 +166,11 @@ function Catalogue({ route, navigation }) {
           <Text style={{ color: 'red', textAlign: 'center', fontSize: 20 }}>{alert}</Text>
           {searchQuery.length == 13 && alert === '' && (
             <View>
-              <Text style={{ fontSize: 20, marginVertical: 16, textAlign: 'center' }}>Pilih Durasi BPJS</Text>
+              <Text style={{ color: theme.colors.onBackground, fontSize: 20, marginVertical: 16, textAlign: 'center' }}>Pilih Durasi BPJS</Text>
               {bpjs.amounts.map((item) => (
                 <Card
                   key={item.amount.toString()}
-                  style={{ marginVertical: 6, paddingVertical: 20 }}
+                  style={{ marginVertical: 6, paddingVertical: 20, backgroundColor: theme.colors.secondaryContainer }}
                   onPress={() => {
                     dispatch(currentID(searchQuery));
                     dispatch(currentMerchant('bpjs'));
@@ -178,11 +178,11 @@ function Catalogue({ route, navigation }) {
                     navigation.navigate('Confirm');
                   }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-                    <Text style={{ fontSize: 20, color: 'primary' }}>
+                    <Text style={{ fontSize: 20, color: theme.colors.onSecondaryContainer }}>
                       {item.bulan} bulan
                     </Text>
                     <Icon source='arrow-right-circle' size={30} />
-                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: theme.colors.onSecondaryContainer }}>
                       {item.chargedAmount.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
                     </Text>
                   </View>
