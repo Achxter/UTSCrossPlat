@@ -69,20 +69,22 @@ function Confirm({ navigation }) {
           <Text style={{ fontSize: 16, color: theme.colors.inverseSurface, fontWeight: 'bold' }}>{nominal.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</Text>
         </View>
       </View>
-      <Button style={{
-        width: '90%',
-        borderRadius: 100,
-        position: 'absolute',
-        bottom: 20,
-        left: 20,
-        right: 20,
-        paddingVertical: 6,
-        backgroundColor: theme.colors.tertiary
-      }}
+      <Button
+        style={{
+          width: '90%',
+          borderRadius: 100,
+          position: 'absolute',
+          bottom: 20,
+          left: 20,
+          right: 20,
+          paddingVertical: 6,
+          backgroundColor: nominal > saldo ? theme.colors.surfaceDisabled : theme.colors.tertiary,
+        }}
         mode="contained-tonal"
         onPress={() => navigation.navigate('InsertPin')}
-        disabled={nominal > saldo} >
-        <Text style={{ fontSize: 16, color: theme.colors.onTertiary }}>
+        disabled={nominal > saldo}
+      >
+        <Text style={{ fontSize: 16, color: nominal > saldo ? theme.colors.onSurfaceDisabled : theme.colors.onTertiary }}>
           Konfirmasi
         </Text>
       </Button>
