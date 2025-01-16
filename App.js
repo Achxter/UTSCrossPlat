@@ -1,6 +1,6 @@
 import './gesture-handler';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Platform } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Icon, PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
@@ -75,7 +75,7 @@ export default function App() {
   return (
     <PreferencesContext.Provider value={preferences}>
       <Provider store={store}>
-        <SafeAreaProvider>
+        <SafeAreaProvider style={{ maxWidth: Platform.OS === 'web' ? '430px' : '100%', marginHorizontal: Platform.OS === 'web' ? 'auto' : '' }}>
           <PaperProvider theme={theme}>
             <NavigationContainer theme={theme}>
               <Tab.Navigator screenOptions={{ tabBarStyle: { height: 55 }, headerStyle: { shadowColor: '#000000', shadowRadius: 5 } }}>

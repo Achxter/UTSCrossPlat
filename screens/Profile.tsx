@@ -18,7 +18,7 @@ function Profile() {
       <Image style={{
         marginTop: 50,
         aspectRatio: 1 / 1,
-        width: '100%',
+        width: 250,
         height: 250,
         resizeMode: 'cover',
         borderRadius: 150,

@@ -12,7 +12,8 @@ const carouselData = [
 
 function Homepage({ navigation }) {
   const theme = useTheme();
-  const { width } = Dimensions.get('window');
+  const { width: windowWidth } = Dimensions.get('window');
+  const width = windowWidth > 430 ? 430 : windowWidth;
   const saldo = useSelector((state: { saldo: { value: number } }) => state.saldo.value)
   return (
     <View style={{ height: '100%', paddingHorizontal: 16, backgroundColor: theme.colors.background, justifyContent: 'center' }}>
